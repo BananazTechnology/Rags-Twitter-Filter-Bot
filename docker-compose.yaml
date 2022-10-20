@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  discord-bottles-game-bot:
+    image: bananaztech/rags-twitter-filter-bot:latest
+    container_name: rags-twitter-filter-bot-prod
+    restart: always
+    environment:
+      DB_PORT: 3306
+      DB_HOST: "example.com"
+      DB_USER: "Key-API"
+      DB_PWD: "example"
+      DB_NAME: "keys"
+      TWITTER_API_KEY: ""
+      TWITTER_API_SECRET: ""
+      TWITTER_ACCESS_TOKEN: ""
+      TWITTER_ACCESS_TOKEN_SECRET: ""
+
+networks:
+  default:
+    external:
+      name: frontend
