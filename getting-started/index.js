@@ -8,7 +8,7 @@ function saveFile() {
 function readFile() {
   const dataObj = fs.readFileSync("./data2.json");
   const data2 = JSON.parse(dataObj.toString());
-  console.log(data2[2]);
+  //console.log(data2[2]);
 }
 
 readFile();
