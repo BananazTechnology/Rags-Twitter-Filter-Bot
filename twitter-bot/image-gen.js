@@ -19,7 +19,6 @@ async function addFilters(url, team) {
     var context = canvas.getContext('2d');
     context.canvas.width = 1500;
     context.canvas.height = 1500;
-    context.fillStyle = 'black';
     context.fillRect(0,0,1500,1500);
     
     urls.forEach(async (url) => { 

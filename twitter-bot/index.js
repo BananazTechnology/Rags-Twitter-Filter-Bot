@@ -75,22 +75,25 @@ function pickOne(arr) {
 }
 
 function determineMessage(team) {
+  console.log('determineMessage:',team)
   if(team == 1 ) {
     return pickOne([
-      'Meat Demon',
-      'Meat Demon',
-      'Meat Demon'
+      'Welcome to the Meat Gang, time to get Shmoked! Use this as your PFP till the end of our ARG experience to earn points for your team & earn rewards/giveaways.',
+      'Calling all Meat Demons, Glizzy Gobblers, & Creme lords. Time to gas up Meta ASAP. You’ve joined the Meat Demons Team, use this as your PFP till the end of our ARG experience to earn points for your team & earn rewards/giveaways.',
+      'You’ve been smoked! JUICYYY! You’ve joined the Meat Demons Team, use this as your PFP till the end of our ARG experience to earn points for your team & earn rewards/giveaways.',
+      'B-b-b-b-baddie alert You’ve joined the Meat Demons Team, use this as your PFP till the end of our ARG experience to earn points for your team & earn rewards/giveaways.'
     ])
   } else if(team == 2) {
     return pickOne([
-      'Swag Saint',
-      'Swag Saint',
-      'Swag Saint'
+      'You’ve been dripped out, SWAG up to beat Zuckerberg. Welcome to the Swag Saints, use this as your PFP till the end of our ARG experience to earn points for your team & earn rewards/giveaways.',
+      'Just Swag it… errr Rag it! Time to 420blazeit all over Zuck & his smokey Meat Demons. Welcome to the Swag Saints, use this as your PFP till the end of our ARG experience to earn points for your team & earn rewards/giveaways.',
+      'The God King Orphan descends from the Heavens & bless you with the holy powers, the destiny of a…. Swag Saint. Welcome to the Swag Saints, use this as your PFP till the end of our ARG experience to earn points for your team & earn rewards/giveaways.',
+      'Lil blingie baby has entered the chat. Welcome to the Swag Saints, use this as your PFP till the end of our ARG experience to earn points for your team & earn rewards/giveaways.'
     ])
 
   } else {
-    pickOne([
-      'It does not look like you did this correct... smh big Z is ashamed', 'needs2?'
+    return pickOne([
+      'It does not look like you did this correctly... smh big Z is ashamed', 'Rag King says try again'
     ])
   }
 
