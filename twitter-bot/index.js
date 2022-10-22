@@ -3,7 +3,7 @@ require("dotenv").config();
 const twit = require("./twit");
 const fs = require("fs");
 const path = require("path");
-const paramsPath = path.join(__dirname, "params.json");
+const paramsPath = path.join(__dirname, "params/params.json");
 
 function writeParams(data) {
   console.log("We are writing the params file ...", data);
