@@ -4,7 +4,10 @@ const client = require('https');
 
 
 async function addFilters(url, team) {
+    console.log('TEAM: ', team)
+    console.log(url);
     url = url.replace("_normal","")
+    console.log(url);
     await downloadImage(url, './downloadedimage/temp.png').then(console.log).catch(console.error)
 
     var urls = ['downloadedimage/temp.png'];
@@ -22,14 +25,25 @@ async function addFilters(url, team) {
     context.fillRect(0,0,1500,1500);
     
     urls.forEach(async (url) => { 
-        const image = await loadImage(url)
-        //console.log(image)
-        context.drawImage(image,0,0,1500,1500)
-        fs.writeFileSync(`test.png`, canvas.toBuffer("image/png"));
+        await addLayer(url, context, canvas);
+        await new Promise(r => setTimeout(r, 500));
     })
+}
 
-    
-
+async function addLayer(url, context, canvas) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const image = await loadImage(url);
+            console.log(image)
+            await context.drawImage(image,0,0,1500,1500);
+            console.log('done drawing', image);
+            fs.writeFileSync(`test.png`, await canvas.toBuffer("image/png"));
+            await new Promise(r => setTimeout(r, 500));
+            resolve();
+        } catch(error) {
+            reject(error)
+        }
+    })
 }
 
 async function downloadImage(url, filepath) {
@@ -50,9 +64,9 @@ async function downloadImage(url, filepath) {
 function pickOne(arr) {
     const randomIndex = Math.floor(Math.random() * arr.length);
     const item = arr[randomIndex];
-    // console.log(`Firing pickOne
-    // choices: ${arr}
-    // selected result: ${randomIndex}- ${arr[randomIndex]}`)
+    console.log(`Firing pickOne
+    choices: ${arr}
+    selected result: ${randomIndex}- ${arr[randomIndex]}`)
     return item;
 }
 

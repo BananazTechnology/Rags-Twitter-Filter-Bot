@@ -20,7 +20,7 @@ function getTweets(since_id) {
   return new Promise((resolve, reject) => {
     let params = {
       q: "@bot_zucker",
-      count: 10,
+      count: 1,
     };
     if (since_id) {
       params.since_id = since_id;
@@ -35,10 +35,11 @@ function getTweets(since_id) {
   });
 }
 
-function postTweet(tweet) {
+async function postTweet(tweet) {
   return new Promise(async (resolve, reject) => {
     const team = determineTeam(tweet.text)
     await addFilters(tweet.user.profile_image_url_https, team);
+    await new Promise(r => setTimeout(r, 1000));
     var b64content = fs.readFileSync('./test.png', { encoding: 'base64' })
 
     twit.post('media/upload', { media_data: b64content }, function (err, data, response) {
@@ -143,4 +144,4 @@ async function main() {
 
 console.log("Starting the twitter bot ...");
 
-setInterval(main, 10000);
+setInterval(main, 8000);
