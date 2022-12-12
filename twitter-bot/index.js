@@ -20,12 +20,13 @@ function getTweets(since_id) {
   return new Promise((resolve, reject) => {
     let params = {
       q: "@bot_zucker",
-      count: 1,
+      count: 20,
+      sort_order: "recency"
     };
     if (since_id) {
       params.since_id = since_id;
     }
-    console.log("We are getting the tweets ...", params);
+    console.log("We are getting the tweets ...");
     twit.get("search/tweets", params, (err, data) => {
       if (err) {
         return reject(err);
@@ -102,9 +103,9 @@ function determineMessage(team) {
 
 function determineTeam(text) {
   text = text.toLowerCase()
-    if(text.includes('meatdemon') || text.includes('meat demon')) {
+    if(text.includes('meatdemon') || text.includes('meat demon') || text.includes('meatdemons') || text.includes('meat demons')) {
       return 1
-    } else if(text.includes('swagsaint') || text.includes('swag saint')) {
+    } else if(text.includes('swagsaint') || text.includes('swag saint') || text.includes('swagsaints') || text.includes('swag saints')) {
       return 2
     } else {
       return 0
@@ -126,17 +127,21 @@ async function main() {
       return 0;
     })
     console.log("We got the tweets", tweets.length);
-    for await (let tweet of tweets) {
-      try {
+    const tweet = tweets[0];
+    if(tweet) {
+      console.log(tweet);
+      if(!tweet.in_reply_to_status_id && !tweet.retweeted_status) {
         await postTweet(tweet);
         console.log("Successful tweet " + tweet.id_str);
-      } catch (e) {
-        console.log(e)
-        console.log("Unsuccessful tweet " + tweet.id_str);
+      } else {
+        console.log('Skipped dis bitch yo')
       }
+      
       params.since_id = tweet.id_str;
+      writeParams(params);
+    } else {
+      console.log('Nothin this time round partner')
     }
-    writeParams(params);
   } catch (e) {
     console.error(e);
   }
@@ -144,4 +149,4 @@ async function main() {
 
 console.log("Starting the twitter bot ...");
 
-setInterval(main, 8000);
+setInterval(main, 20000);
